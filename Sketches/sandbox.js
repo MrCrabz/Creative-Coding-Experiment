@@ -13,6 +13,7 @@ const radToDeg = (rad) => {
 
 const rgbGenerator = (index) => {
   return (`rgb(${Math.floor(Math.random() * index)},${Math.floor(Math.random() * index)},${Math.floor(Math.random() * index)})`);
+  // return 'white';
 }
 
 const dimentionGeneratorSpikes = (value) => {
@@ -37,14 +38,15 @@ const dimentionGeneratorArcs = (value, context) => {
 
 const sketch = () => {
   return ({ context, width, height }) => {
-    context.fillStyle = 'white';
+    // context.fillStyle = `rgb(${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)})`;
+    context.fillStyle= 'white';
     context.fillRect(0, 0, width, height);
 
     let cx = width/2;
     let cy = height/2;
 
     let volume = random.range(20,100);
-    let numberOfInstances = random.range(500,1000);
+    let numberOfInstances = random.range(1000,5000);
 
     for (var i = 0; i < numberOfInstances; i++) {
 
@@ -91,27 +93,27 @@ class Agent {
 
       generatedContex.save();
       generatedContex.translate( this.object.x , this.object.y );
-      generatedContex.rotate(this.object.angle);
-      generatedContex.scale(.5,this.object.seed.range(.1, .5));
+      generatedContex.rotate(-this.object.angle);
+      generatedContex.scale(.5,this.object.seed.range(.5, .7));
 
       // Spikes
       generatedContex.beginPath();
       generatedContex.fillStyle = rgbGenerator(255);
-      generatedContex.globalAlpha = this.object.seed.range(.5, 1);
+      generatedContex.globalAlpha = this.object.seed.range(.5, .7);
       generatedContex.fillRect(dimentionGeneratorSpikes(this.object.w/2), dimentionGeneratorSpikes(this.object.h/2), dimentionGeneratorSpikes(this.object.w/2), dimentionGeneratorSpikes(this.object.h/2));
       generatedContex.restore();
 
-      generatedContex.save();
-      generatedContex.translate( this.object.cx , this.object.cy );
-      generatedContex.rotate(-this.object.angle);
-      generatedContex.globalAlpha = this.object.seed.range(.8, .9);
-      // // // Arc
-      generatedContex.beginPath();
-      generatedContex.arc(0, 0, dimentionGeneratorArcs(this.object.radius, "radius"), dimentionGeneratorArcs(this.object.slice, "startAngle"), dimentionGeneratorArcs(this.object.slice, "endAngle"));
-      generatedContex.strokeStyle = rgbGenerator(255);
-      generatedContex.lineWidth = this.object.seed.range(this.object.w, this.object.w/2);
-      generatedContex.stroke();
-      generatedContex.restore();
+      // generatedContex.save();
+      // generatedContex.translate( this.object.cx , this.object.cy );
+      // generatedContex.rotate(-this.object.angle);
+      // generatedContex.globalAlpha = this.object.seed.range(.5, .7);
+      // // // // Arc
+      // generatedContex.beginPath();
+      // generatedContex.arc(0, 0, dimentionGeneratorArcs(this.object.radius, "radius"), dimentionGeneratorArcs(this.object.slice, "startAngle"), dimentionGeneratorArcs(this.object.slice, "endAngle"));
+      // generatedContex.strokeStyle = rgbGenerator(255);
+      // generatedContex.lineWidth = this.object.seed.range(this.object.w, this.object.w/2);
+      // generatedContex.stroke();
+      // generatedContex.restore();
 
     }
 
