@@ -12,8 +12,8 @@ const radToDeg = (rad) => {
 }
 
 const rgbGenerator = (index) => {
-  return (`rgb(${Math.floor(Math.random() * index)},${Math.floor(Math.random() * index)},${Math.floor(Math.random() * index)})`);
-  // return 'white';
+  // return (`rgb(${Math.floor(Math.random() * index)},${Math.floor(Math.random() * index)},${Math.floor(Math.random() * index)})`);
+  return 'white';
 }
 
 const dimentionGeneratorSpikes = (value) => {
@@ -39,7 +39,7 @@ const dimentionGeneratorArcs = (value, context) => {
 const sketch = () => {
   return ({ context, width, height }) => {
     // context.fillStyle = `rgb(${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)})`;
-    context.fillStyle= 'white';
+    context.fillStyle= 'black';
     context.fillRect(0, 0, width, height);
 
     let cx = width/2;
@@ -99,7 +99,7 @@ class Agent {
       // Spikes
       generatedContex.beginPath();
       generatedContex.fillStyle = rgbGenerator(255);
-      generatedContex.globalAlpha = this.object.seed.range(.5, .7);
+      generatedContex.globalAlpha = this.object.seed.range(.1, .7);
       generatedContex.fillRect(dimentionGeneratorSpikes(this.object.w/2), dimentionGeneratorSpikes(this.object.h/2), dimentionGeneratorSpikes(this.object.w/2), dimentionGeneratorSpikes(this.object.h/2));
       generatedContex.restore();
 
