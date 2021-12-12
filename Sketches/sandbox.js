@@ -99,7 +99,7 @@ class Agent {
       // Spikes
       generatedContex.beginPath();
       generatedContex.fillStyle = rgbGenerator(255);
-      generatedContex.globalAlpha = this.object.seed.range(.1, .7);
+      generatedContex.globalAlpha = this.object.seed.range(.5, .7);
       generatedContex.fillRect(dimentionGeneratorSpikes(this.object.w/2), dimentionGeneratorSpikes(this.object.h/2), dimentionGeneratorSpikes(this.object.w/2), dimentionGeneratorSpikes(this.object.h/2));
       generatedContex.restore();
 
