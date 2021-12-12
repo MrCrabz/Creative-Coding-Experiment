@@ -69,7 +69,7 @@ const sketch = () => {
 
       context.save();
       context.translate( x , y );
-      context.rotate(-angle);
+      context.rotate(angle);
       context.scale(1,seeded.range(.5, 1))
 
       // Spikes
