@@ -42,6 +42,11 @@ const sketch = () => {
     context.fillStyle= 'black';
     context.fillRect(0, 0, width, height);
 
+    document.addEventListener('keyup', function(e){
+      if(e.keyCode == 32)
+        window.location.reload();
+    })
+
     let cx = width/2;
     let cy = height/2;
 
