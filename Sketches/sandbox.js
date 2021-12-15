@@ -40,6 +40,11 @@ const sketch = () => {
     context.fillStyle = 'white';
     context.fillRect(0, 0, width, height);
 
+    document.addEventListener('keyup', function(e){
+      if(e.keyCode == 32)
+        window.location.reload();
+    })
+
     const cx = width/2;
     const cy = height/2;
     const w = width/100;
@@ -81,7 +86,7 @@ const sketch = () => {
 
       context.save();
       context.translate( cx , cy );
-      context.rotate(-angle);
+      context.rotate(angle);
       context.globalAlpha = seeded.range(.8, .9);
       // Arc
       context.beginPath();
