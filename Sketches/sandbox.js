@@ -11,12 +11,21 @@ const radToDeg = (rad) => {
   return rad * Math.PI / 180;
 }
 
-const rgbGenerator = (index) => {
-  return (`rgb(${Math.floor(Math.random() * index)},${Math.floor(Math.random() * index)},${Math.floor(Math.random() * index)})`);
+const rgbGenerator = () => {
+  // let lightness = Math.floor(random.range(0, 90);
+  // let colorVariations = [];
+
+  return (`hsl(${Math.floor(random.range(0, 360))},${Math.floor(random.range(50, 100))}%,${Math.floor(random.range(0, 90))}%)`);
 }
+
+// "hsl(306, 81%, 58%)"
 
 const dimentionGeneratorSpikes = (value) => {
   return random.range(-value * 1.2, -value /1.2);
+}
+
+const colorMatcher = (colorSeed) => {
+
 }
 
 const dimentionGeneratorArcs = (value, context) => {
@@ -40,28 +49,28 @@ const sketch = () => {
     context.fillStyle = 'white';
     context.fillRect(0, 0, width, height);
 
+    document.addEventListener('keyup', function(e){
+      if(e.keyCode == 32)
+        window.location.reload();
+    })
+
     const cx = width/2;
     const cy = height/2;
     const w = width/100;
     const h = height/10;
 
-    let x, y, seeded;
+    let x, y, seed;
     const radius = width/3;
     let numberOfTicks = random.range(1,500);
 
+    let baseColorSeed = rgbGenerator(255);
 
-    let colorOne = rgbGenerator(255);
-    let colorTwo = rgbGenerator(255);
 
     for (var i = 0; i < numberOfTicks; i++) {
 
-      seeded = random.createRandom(i);
+      seed = random.createRandom(i);
 
-      // let EyeInstance = new Eye(width, height, seeded);
-      //
-      // console.log(EyeInstance);
-
-      let slice = radToDeg(360 / numberOfTicks)
+      let slice = radToDeg(360 / numberOfTicks);
       let angle = slice * i;
 
       x = cx + radius * Math.sin(angle);
@@ -70,24 +79,24 @@ const sketch = () => {
       context.save();
       context.translate( x , y );
       context.rotate(-angle);
-      context.scale(1,seeded.range(.5, 1))
+      context.scale(1,seed.range(.5, 1));
 
       // Spikes
       context.beginPath();
       context.fillStyle = rgbGenerator(255);
-      context.globalAlpha = seeded.range(.5, .9);
+      context.globalAlpha = seed.range(.5, .9);
       context.fillRect(dimentionGeneratorSpikes(w), dimentionGeneratorSpikes(h), dimentionGeneratorSpikes(w), dimentionGeneratorSpikes(h));
       context.restore();
 
       context.save();
       context.translate( cx , cy );
       context.rotate(-angle);
-      context.globalAlpha = seeded.range(.8, .9);
+      context.globalAlpha = seed.range(.8, .9);
       // Arc
       context.beginPath();
       context.arc(0, 0, dimentionGeneratorArcs(radius, "radius"), dimentionGeneratorArcs(slice, "startAngle"), dimentionGeneratorArcs(slice, "endAngle"));
       context.strokeStyle = rgbGenerator(255);
-      context.lineWidth = seeded.range(w, 4*w);
+      context.lineWidth = seed.range(w, 4*w);
       context.stroke();
       context.restore();
     }
