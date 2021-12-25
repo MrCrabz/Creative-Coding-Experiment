@@ -124,17 +124,17 @@ const sketch = () => {
       context.save();
       context.translate( x , y );
       context.rotate(angle);
-      context.scale(1,seeded.range(.5, 1))
-
-      // Spikes
-      context.beginPath();
-      context.fillStyle = colorSpectrum[i];
-      context.globalAlpha = seeded.range(.5, .9);
-      context.fillRect(dimentionGeneratorSpikes(w), dimentionGeneratorSpikes(h), dimentionGeneratorSpikes(w), dimentionGeneratorSpikes(h));
-      context.restore();
+      // context.scale(1,seeded.range(.5, 1))
+      //
+      // // Spikes
+      // context.beginPath();
+      // context.fillStyle = colorSpectrum[i];
+      // context.globalAlpha = seeded.range(.5, .9);
+      // context.fillRect(dimentionGeneratorSpikes(w), dimentionGeneratorSpikes(h), dimentionGeneratorSpikes(w), dimentionGeneratorSpikes(h));
+      // context.restore();
 
       // Arc
-      context.save();
+      // context.save();
       context.translate( cx , cy );
       context.rotate(-angle);
       context.globalAlpha = seeded.range(.8, .9);
