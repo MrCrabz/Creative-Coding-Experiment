@@ -20,7 +20,7 @@ const dimentionGeneratorSpikes = (value) => {
 const dimentionGeneratorArcs = (value, context) => {
   switch (context) {
     case "radius":
-      return random.range(value * 1.4, value /2);
+      return value;
       break;
     case "startAngle":
       return random.range(value*2, value*3.3);
@@ -70,10 +70,6 @@ const spectrumGenerator = (seedHue, seedSaturation, seedLightness, spectrumSize)
       currentHue = seedHue;
     }
 
-    console.log(currentHue);
-    console.log(secondaryHue);
-    console.log(seedHue);
-
     let spectrumLightness = Math.floor(i*spectrumLightnessChanges);
 
     spectrumOfMatchingColors.push(`hsl(${currentHue},${seedSaturation}%,${spectrumLightness}%)`);
@@ -105,11 +101,14 @@ const sketch = () => {
 
     let x, y, seeded;
     const radius = width/3;
-    let numberOfTicks = random.range(500,1000);
+    let numberOfTicks = random.range(0,100);
 
 
     let colorSpectrum = spectrumGenerator(hues, saturation, lightness, numberOfTicks);
-    console.log(colorSpectrum);
+    // console.log(colorSpectrum);
+
+    let value = w;
+    let generatedRadius;
 
     for (var i = 0; i < numberOfTicks; i++) {
 
@@ -127,21 +126,25 @@ const sketch = () => {
       // context.scale(1,seeded.range(.5, 1))
       //
       // // Spikes
-      // context.beginPath();
+      context.beginPath();
       // context.fillStyle = colorSpectrum[i];
       // context.globalAlpha = seeded.range(.5, .9);
       // context.fillRect(dimentionGeneratorSpikes(w), dimentionGeneratorSpikes(h), dimentionGeneratorSpikes(w), dimentionGeneratorSpikes(h));
-      // context.restore();
+      context.restore();
+
+      generatedRadius = value*i;
+
+      console.log(generatedRadius);
 
       // Arc
-      // context.save();
+      context.save();
       context.translate( cx , cy );
       context.rotate(-angle);
-      context.globalAlpha = seeded.range(.8, .9);
+      // context.globalAlpha = seeded.range(.8, .9);
       context.beginPath();
-      context.arc(0, 0, dimentionGeneratorArcs(radius, "radius"), dimentionGeneratorArcs(slice, "startAngle"), dimentionGeneratorArcs(slice, "endAngle"));
+      context.arc(0, 0, generatedRadius, dimentionGeneratorArcs(radius, "startAngle"), dimentionGeneratorArcs(1, "endAngle"));
       context.strokeStyle = colorSpectrum[i];
-      context.lineWidth = seeded.range(w, 4*w);
+      context.lineWidth = w;
       context.stroke();
       context.restore();
     }
